@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 public class Keycapture implements KeyListener {
-    HashMap<Character, JButton> buttonMap;
+    private HashMap<Character, JButton> buttonMap;
 
     public Keycapture(HashMap<Character, JButton> buttonMap) {
         this.buttonMap = new HashMap<>();
