@@ -67,7 +67,7 @@ public class Calculadora {
 
         else if (valor == '='){
             try {
-                switch (operacao) { //provavelmente vai crashar se o operador 1 for null ou ""
+                switch (operacao) {
                     case '+':
                         resultado = Double.valueOf(operando1) + Double.valueOf(operando2);
                         break;
