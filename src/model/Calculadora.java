@@ -39,8 +39,13 @@ public class Calculadora {
 
         if (valor == '⌫'){
             if (operacao == ' '){
-                operando1 = operando1.substring(0, operando1.length()-1);
-                visor = operando1;
+                try {
+                    operando1 = operando1.substring(0, operando1.length() - 1);
+                    visor = operando1;
+                }
+                catch (StringIndexOutOfBoundsException e){
+                    //seria legal botar uns efeitos que ja ta vazia a string
+                }
             }
             else if(operando2.equals("")){
                 operacao = ' ';
@@ -61,35 +66,40 @@ public class Calculadora {
         }
 
         else if (valor == '='){
-            switch (operacao){ //provavelmente vai crashar se o operador 1 for null ou ""
-                case '+':
-                    resultado = Double.valueOf(operando1) + Double.valueOf(operando2);
-                    break;
-                case '-':
-                    resultado = Double.valueOf(operando1) - Double.valueOf(operando2);
-                    break;
-                case '/':
-                    resultado = Double.valueOf(operando1) / Double.valueOf(operando2);
-                    break;
-                case '*':
-                    resultado = Double.valueOf(operando1) * Double.valueOf(operando2);
-                    break;
-                case '%':
-                    resultado = Double.valueOf(operando2)/100 * Double.valueOf(operando1);
-                    break;
-                case '^':
-                    double total = 1;
-                    double op1 = Double.valueOf(operando1);
-                    for (int i = 1; i <= Integer.valueOf(operando2); i++){
-                        total = total * op1;
-                    }
-                    resultado = total;
-                    break;
+            try {
+                switch (operacao) { //provavelmente vai crashar se o operador 1 for null ou ""
+                    case '+':
+                        resultado = Double.valueOf(operando1) + Double.valueOf(operando2);
+                        break;
+                    case '-':
+                        resultado = Double.valueOf(operando1) - Double.valueOf(operando2);
+                        break;
+                    case '/':
+                        resultado = Double.valueOf(operando1) / Double.valueOf(operando2);
+                        break;
+                    case '*':
+                        resultado = Double.valueOf(operando1) * Double.valueOf(operando2);
+                        break;
+                    case '%':
+                        resultado = Double.valueOf(operando2) / 100 * Double.valueOf(operando1);
+                        break;
+                    case '^':
+                        double total = 1;
+                        double op1 = Double.valueOf(operando1);
+                        for (int i = 1; i <= Integer.valueOf(operando2); i++) {
+                            total = total * op1;
+                        }
+                        resultado = total;
+                        break;
+                }
+                operando1 = String.valueOf(resultado);
+                operacao = ' ';
+                operando2 = "";
+                visor = operando1;
             }
-            operando1 = String.valueOf(resultado);
-            operacao = ' ';
-            operando2 = "";
-            visor = operando1;
+            catch (NumberFormatException e){
+                //botar efeito se tudo der certo
+            }
         }
     }
 

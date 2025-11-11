@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -60,11 +61,13 @@ public class Janela extends JFrame implements ActionListener{
     }
 
     private void registrarHandlers(){
+        HashMap<Character, JButton> buttonMap = new HashMap<>(); //mapear texto das teclas para botoes (talvez nao funcione com teclas nao visiveis
         for (int i = 0; i < buttons.length; i++){
+            buttonMap.put(buttons[i].getText().charAt(0), buttons[i]);
             buttons[i].addActionListener(this);
         }
 
-        tfield.addKeyListener(new Keycapture()); //registrar teclas
+        tfield.addKeyListener(new Keycapture(buttonMap)); //registrar teclas
     }
 
     @Override
@@ -78,6 +81,7 @@ public class Janela extends JFrame implements ActionListener{
         }
         finally {
             tfield.setText(calc.getVisor());
+            tfield.requestFocusInWindow();
         }
     }
 }
