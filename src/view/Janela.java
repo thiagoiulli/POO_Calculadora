@@ -16,7 +16,7 @@ public class Janela extends JFrame implements ActionListener{
     private JPanel panel;
     private JButton[] buttons;
     private JTextField tfield;
-    Calculadora calc;
+    private Calculadora calc;
 
     public Janela(){
         instanciarComponentes();
