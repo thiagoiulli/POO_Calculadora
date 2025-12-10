@@ -1,5 +1,9 @@
 package model;
 
+import view.Janela;
+
+import javax.swing.JTextField;
+
 public class Calculadora {
     private char operacao;
     private String operando1;
@@ -32,7 +36,7 @@ public class Calculadora {
         }
     }
 
-    public void decidirOperacao(char valor){
+    public void decidirOperacao(char valor, JTextField jtext){
         if (valor == 'C'){
             this.limparTudo();
         }
@@ -44,7 +48,7 @@ public class Calculadora {
                     visor = operando1;
                 }
                 catch (StringIndexOutOfBoundsException e){
-                    //seria legal botar uns efeitos que ja ta vazia a string
+                    Janela.emptyfied(jtext);
                 }
             }
             else if(operando2.equals("")){
@@ -98,7 +102,7 @@ public class Calculadora {
                 visor = operando1;
             }
             catch (NumberFormatException e){
-                //botar efeito se tudo der certo
+                Janela.emptyfied(jtext); //efeito
             }
         }
     }

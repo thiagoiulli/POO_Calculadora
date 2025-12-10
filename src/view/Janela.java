@@ -4,6 +4,7 @@ import model.Calculadora;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -11,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 
 public class Janela extends JFrame implements ActionListener{
     private JPanel panel;
@@ -70,14 +73,20 @@ public class Janela extends JFrame implements ActionListener{
         tfield.addKeyListener(new Keycapture(buttonMap)); //registrar teclas
     }
 
+    public static void emptyfied(JTextField tfield){
+        Border lineborder = BorderFactory.createLineBorder(Color.RED);
+        tfield.setBorder(lineborder);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e){
         char btext = ((JButton)e.getSource()).getText().charAt(0);
         try{
             Double.parseDouble(String.valueOf(btext));
             calc.atribuirOperadores(btext);
+            tfield.setBorder(null); //retirar borda vermelha caso caixa vazia
         } catch (NumberFormatException ex) {
-            calc.decidirOperacao(btext);
+            calc.decidirOperacao(btext, tfield);
         }
         finally {
             tfield.setText(calc.getVisor());

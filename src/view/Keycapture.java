@@ -27,9 +27,6 @@ public class Keycapture implements KeyListener {
             else if (e.getKeyChar() == '') {
                 buttonMap.get('C').doClick();
             }
-            else{
-                //seria bacana colocar uns efeitos quando digitar uma tecla nao permitida
-            }
         }
     }
 
